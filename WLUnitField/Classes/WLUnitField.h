@@ -10,6 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSUInteger, WLUnitFieldStyle) {
+    WLUnitFieldStyleRoundedRect, ///< 方框
+    WLUnitFieldStyleSingleLine, ///< 下划线
+};
 
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
     UIKIT_EXTERN NSNotificationName const WLUnitFieldDidBecomeFirstResponderNotification;
@@ -25,6 +29,8 @@ IB_DESIGNABLE
 @interface WLUnitField : UIControl <UIKeyInput>
 
 @property (nullable, nonatomic, weak) id<WLUnitFieldDelegate> delegate;
+
+@property (nonatomic, assign) WLUnitFieldStyle unitFieldStyle;
 
 /**
  保留的用户输入的字符串，最好使用数字字符串，因为目前还不支持其他字符。

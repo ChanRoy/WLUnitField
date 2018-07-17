@@ -426,13 +426,21 @@
         
     } else {
         for (int i = (int)_characterArray.count; i < _inputUnitCount; i++) {
-            CGRect unitRect = CGRectMake(i * (unitSize.width + _unitSpace),
-                                         0,
-                                         unitSize.width,
-                                         unitSize.height);
-            unitRect = CGRectInset(unitRect, _borderWidth * 0.5, _borderWidth * 0.5);
-            UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:unitRect cornerRadius:_borderRadius];
-            CGContextAddPath(_ctx, bezierPath.CGPath);
+            
+            if (_unitFieldStyle == WLUnitFieldStyleRoundedRect) {
+                
+                CGRect unitRect = CGRectMake(i * (unitSize.width + _unitSpace),
+                                             0,
+                                             unitSize.width,
+                                             unitSize.height);
+                unitRect = CGRectInset(unitRect, _borderWidth * 0.5, _borderWidth * 0.5);
+                UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:unitRect cornerRadius:_borderRadius];
+                CGContextAddPath(_ctx, bezierPath.CGPath);
+            }else if (_unitFieldStyle == WLUnitFieldStyleSingleLine) {
+                
+                CGContextMoveToPoint(_ctx, (i * (unitSize.width + _unitSpace)), (unitSize.height));
+                CGContextAddLineToPoint(_ctx, (i * (unitSize.width + _unitSpace) + unitSize.width), (unitSize.height));
+            }
         }
     }
     CGContextDrawPath(_ctx, kCGPathStroke);
@@ -498,13 +506,21 @@
     CGContextSetLineCap(_ctx, kCGLineCapRound);
     
     for (int i = 0; i < _characterArray.count; i++) {
-        CGRect unitRect = CGRectMake(i * (unitSize.width + _unitSpace),
-                                     0,
-                                     unitSize.width,
-                                     unitSize.height);
-        unitRect = CGRectInset(unitRect, _borderWidth * 0.5, _borderWidth * 0.5);
-        UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:unitRect cornerRadius:_borderRadius];
-        CGContextAddPath(_ctx, bezierPath.CGPath);
+        
+        if (_unitFieldStyle == WLUnitFieldStyleRoundedRect) {
+            
+            CGRect unitRect = CGRectMake(i * (unitSize.width + _unitSpace),
+                                         0,
+                                         unitSize.width,
+                                         unitSize.height);
+            unitRect = CGRectInset(unitRect, _borderWidth * 0.5, _borderWidth * 0.5);
+            UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRoundedRect:unitRect cornerRadius:_borderRadius];
+            CGContextAddPath(_ctx, bezierPath.CGPath);
+        }else if (_unitFieldStyle == WLUnitFieldStyleSingleLine) {
+            
+            CGContextMoveToPoint(_ctx, (i * (unitSize.width + _unitSpace)), (unitSize.height));
+            CGContextAddLineToPoint(_ctx, (i * (unitSize.width + _unitSpace) + unitSize.width), (unitSize.height));
+        }
     }
         
     CGContextDrawPath(_ctx, kCGPathStroke);

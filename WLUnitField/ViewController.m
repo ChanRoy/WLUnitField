@@ -24,6 +24,7 @@
     _unitField.delegate = self;
     _unitField.keyboardType = UIKeyboardTypeASCIICapable;
     _unitField.text = @"一😀12";
+    _unitField.unitFieldStyle = WLUnitFieldStyleSingleLine;
 }
 
 - (BOOL)unitField:(WLUnitField *)uniField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
